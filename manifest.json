@@ -1,0 +1,102 @@
+[
+  {
+    "id": "LJ001-0001",
+    "text": "zero",
+    "duration": 0.6435,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ001-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ001-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 49
+  },
+  {
+    "id": "LJ002-0001",
+    "text": "one",
+    "duration": 0.51725,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ002-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ002-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 39
+  },
+  {
+    "id": "LJ003-0001",
+    "text": "two",
+    "duration": 0.49875,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ003-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ003-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 38
+  },
+  {
+    "id": "LJ004-0001",
+    "text": "three",
+    "duration": 0.48575,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ004-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ004-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 37
+  },
+  {
+    "id": "LJ005-0001",
+    "text": "four",
+    "duration": 0.4635,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ005-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ005-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 35
+  },
+  {
+    "id": "LJ006-0001",
+    "text": "five",
+    "duration": 0.42425,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ006-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ006-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 32
+  },
+  {
+    "id": "LJ007-0001",
+    "text": "six",
+    "duration": 0.827875,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ007-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ007-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 63
+  },
+  {
+    "id": "LJ008-0001",
+    "text": "seven",
+    "duration": 0.432125,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ008-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ008-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 33
+  },
+  {
+    "id": "LJ009-0001",
+    "text": "eight",
+    "duration": 0.347,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ009-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ009-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 27
+  },
+  {
+    "id": "LJ010-0001",
+    "text": "nine",
+    "duration": 0.603375,
+    "continuous_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\continuous\\LJ010-0001.pt",
+    "discrete_path": "C:\\Users\\Navie\\.gemini\\antigravity\\scratch\\multimodal-audio-suite\\cache\\discrete\\LJ010-0001.pt",
+    "whisper_dim": 384,
+    "num_codebooks": 2,
+    "codec_seq_len": 46
+  }
+]

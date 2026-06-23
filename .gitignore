@@ -1,0 +1,19 @@
+# Large Audio Datasets and Samples
+bootstrapped_ljspeech/
+synthetic_ljspeech/
+*.wav
+
+# Extracted Feature Cache and Embeddings
+cache/
+cache_bootstrapped/
+
+# Model Checkpoints, Adapters, and Learned Projectors
+*adapter*/
+*.pt
+
+# Python Bytecode and System Caches
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+.idea/
