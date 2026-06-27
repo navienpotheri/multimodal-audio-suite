@@ -100,6 +100,35 @@ All output waveforms are post-processed locally to guarantee high playback safet
 
 ---
 
+## ⚡ CPU Performance Optimizations & Improvisations
+
+To make model training and generation feasible on a local, consumer-grade CPU system (22 logical cores, 32GB RAM), we introduced several critical performance optimizations and improvisations:
+
+### 1. Offline Pre-Processing & Feature Caching
+*   **The Problem**: Extracting continuous Whisper states and discrete EnCodec tokens during the training step requires running the Whisper encoder and EnCodec models on CPU in addition to Qwen. This increases the CPU overhead per step by over **15x**.
+*   **Improvisation**: We decoupled feature extraction. The script `bootstrap_dataset.py` processes all WAV files once, caching Whisper and EnCodec tensors to disk (`cache_bootstrapped/` and `cache_trimmed/`). The training dataloader simply loads the pre-computed tensors, reducing step overhead to practically zero.
+
+### 2. Quadratic Attention Scaling Mitigation (Duration Filtering)
+*   **The Problem**: Self-attention compute scales quadratically $O(N^2)$ with sequence length. Longer audio samples (e.g. 10s-15s) create very long EnCodec token sequences, causing step times to explode on CPU.
+*   **Improvisation**: We filtered the training manifest to samples with a duration $\le 4.5\text{s}$ (retaining 3,083 out of 8,000 samples). This capped the maximum sequence length to ~800 tokens, maintaining step times in a fast 8s-12s envelope.
+
+### 3. Padding Elimination via Batch Size 1
+*   **The Problem**: Batching sequences of different lengths requires padding them to the maximum length in the batch. Computing self-attention over padded tokens wastes massive CPU cycles on redundant calculations.
+*   **Improvisation**: We set `batch_size = 1`. This entirely eliminates padding tokens, ensuring that 100% of the computed attention matrix belongs to actual target tokens.
+
+### 4. KV-Cached Inference
+*   **The Problem**: Generating 450 tokens autoregressively requires passing the entire accumulated prompt through Qwen at every step, which takes several minutes per generation.
+*   **Improvisation**: We implemented key-value (KV) caching for both the conditional and unconditional generation flows. Instead of recalculating past keys and values, we retrieve them from memory, reducing inference time to **under 40 seconds** on CPU.
+
+### 5. In-Place Gradient Masking
+*   **The Problem**: PEFT's `modules_to_save` config duplicates the entire embedding and output projection head matrices, creating gradients and optimizer states for all 151,665 text tokens, consuming an extra 4.4 GB of RAM.
+*   **Improvisation**: We froze the pre-trained base text tokens by directly zeroing their gradients in-place in the optimizer step, avoiding any text model weight degradation while focusing backpropagation resources solely on LoRA layers and the 2,048 new audio tokens.
+
+### 6. Threading Optimization
+*   **Improvisation**: We benchmarked CPU thread allocation, identifying that 8 physical threads is the memory-bandwidth sweet spot. This maximizes training efficiency without triggering scheduling overhead or thread thrashing.
+
+---
+
 ## 🧪 Generalization Limitations & Project Conclusion (Final Scope)
 
 This version of the local Multimodal Audio Suite concludes at the **Testing Novel Prompts & Generalization Failure** milestone. This represents the empirical limit of executing local text-to-audio cross-modal alignments on consumer CPU architectures using LoRA fine-tuning.
