@@ -211,15 +211,24 @@ def main():
             step_time = time.time() - t_step
             print(f"  Epoch {epoch+1:02d} | Step {step+1:02d}/{len(dataloader):02d} | Loss: {step_loss:.4f} | SeqLen: {input_ids.shape[1]} | Time: {step_time:.2f}s", flush=True)
             
+            # Save intermediate checkpoints every 100 steps (fractional 0.1, 0.2, etc.)
+            if (step + 1) % 100 == 0:
+                save_path = workspace_dir / "tts_v2v_adapter"
+                model.save_pretrained(save_path)
+                tokenizer.save_pretrained(save_path)
+                print(f"  Saved step {step+1:02d} intermediate checkpoints to: {save_path}", flush=True)
+            
         avg_loss = epoch_loss / len(dataloader)
         elapsed = time.time() - start_time
         print(f"Epoch {epoch+1:02d}/{args.epochs:02d} | Avg Loss: {avg_loss:.4f} | Time: {elapsed:.2f}s", flush=True)
         
-    # Save the trained adapter
-    save_path = workspace_dir / "tts_v2v_adapter"
-    model.save_pretrained(save_path)
-    tokenizer.save_pretrained(save_path)
-    print(f"\nTraining completed! Saved model adapter checkpoints to: {save_path}")
+        # Save intermediate checkpoints at the end of each epoch
+        save_path = workspace_dir / "tts_v2v_adapter"
+        model.save_pretrained(save_path)
+        tokenizer.save_pretrained(save_path)
+        print(f"Saved epoch {epoch+1:02d} checkpoints to: {save_path}", flush=True)
+        
+    print(f"\nTraining completed! Final model adapter checkpoints saved to: {save_path}")
     
     # 6. Autoregressive Generation & Decoding
     print("\n" + "="*60)

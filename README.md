@@ -97,3 +97,28 @@ python scratch/test_asr.py
 All output waveforms are post-processed locally to guarantee high playback safety:
 - **Peak Amplitude Normalization**: Hard-capped at **0.8** to prevent digital clipping.
 - **Low-pass Filtering**: Audio frequencies are filtered at **7.5 kHz** to remove high-frequency digital noise and quantization artifacts from the EnCodec reconstructor.
+
+---
+
+## 🧪 Generalization Limitations & Project Conclusion (Final Scope)
+
+This version of the local Multimodal Audio Suite concludes at the **Testing Novel Prompts & Generalization Failure** milestone. This represents the empirical limit of executing local text-to-audio cross-modal alignments on consumer CPU architectures using LoRA fine-tuning.
+
+### 1. Generalization Test Results
+Evaluating the model on unseen (out-of-distribution) prompts reveals that while the model learns to synthesize structured speech sequences for the training corpus, it fails to generalize to novel text configurations. During generation, the autoregressive feedback loop accumulates minor prediction errors and drifts into alternative semantic states.
+
+Applying **Classifier-Free Guidance (CFG)** forces the model away from collapsed static/silence, steering it to construct alternative English sentences, but it remains unaligned with the target text:
+
+#### Prompt 1: *"A young woman is sitting in a library reading a book."*
+*   **Greedy Decoding**: *"and see you later."*
+*   **CFG 1.5**: *"In that way, we can have our pain being so quick to record."*
+*   **CFG 3.0**: *"I'll open it in that direction, there it is, remember, keep it."*
+
+#### Prompt 2: *"There are no people visible in this image."*
+*   **Greedy Decoding**: *"This idiom, clobinfig, not says..."*
+*   **CFG 1.5**: *"The subject is simple and my shepherds understand things."*
+*   **CFG 3.0**: *"The people who have been following this second video, they saw"*
+
+### 2. Current Project Scope Limits
+*   **Hardware Ceiling**: Generalization on a 3,000+ sample size corpus requires 10-15+ epochs of training to pull average loss down and resolve exposure bias. On CPU, this takes ~70-100 hours, setting a clear operational boundary for this local phase.
+*   **Alignment baseline**: The codebase successfully implements local feature extraction, constrained interleaving logits control, scale-free EnCodec decoding, and loopback Whisper ASR verification, establishing a complete baseline pipeline.
